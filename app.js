@@ -4,7 +4,7 @@ let productData = [];
 
 // API
 
-fetch("https://api.escuelajs.co/api/v1/products")
+fetch("https://fakestoreapi.com/products")
   .then(function (res) {
     return res.json();
   })
@@ -25,14 +25,16 @@ setTimeout(function () {
     container.innerHTML += `<div>
    <div>
             <img src="${
-              product?.images?.[0] ||
-              product?.images?.[1] ||
-              product?.images?.[2] ||
-              product?.images?.[3]
-            }" "width = "100px" height = "100px"" alt="">
+              product.image[0] ||
+              product.image[1] ||
+              product.image[2] ||
+              product.image[3] ||
+              product.image[4] 
+            }" width = "100px" height = "100px" >
+            <p>${product.category}</p>
+            <p>${product.description}</p>
             <p>${product.price}</p>
             <p>${product.title}</p>
-
     </div>
     </div>`;
   }
