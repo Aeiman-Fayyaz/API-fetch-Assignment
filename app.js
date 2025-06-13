@@ -12,30 +12,31 @@ fetch("https://fakestoreapi.com/products")
     // Console API data
     console.log(data);
     productData = data;
+    displayData();
   });
 
 // console.log(products);
 
 // For storing data in UI
-const container = document.getElementById("container");
-setTimeout(function () {
-  for (let i = 0; i < productData.length; i++) {
-    console.log(productData[i]);
-    let product = productData[i];
-    container.innerHTML += `<div>
-   <div>
-            <img src="${
-              product.image[0] ||
-              product.image[1] ||
-              product.image[2] ||
-              product.image[3] ||
-              product.image[4] 
-            }" width = "100px" height = "100px" >
-            <p>${product.category}</p>
-            <p>${product.description}</p>
-            <p>${product.price}</p>
-            <p>${product.title}</p>
-    </div>
-    </div>`;
-  }
-},1000);
+function displayData() {
+  const container = document.getElementById("container");
+  productData.forEach((product) => {
+    const card = document.createElement("div");
+    card.className = "product-card";
+
+    card.innerHTML = `
+            <img src="${product.image}" class="product-image" alt="${
+      product.title
+    }">
+            <div class="product-content">
+                <h3 class="product-title">${product.title}</h3>
+                <span class="product-category">${product.category}</span>
+                <p class="product-description">${product.description}</p>
+                <p class="product-price">$${product.price.toFixed(2)}</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        `;
+
+    container.appendChild(card);
+  });
+}
